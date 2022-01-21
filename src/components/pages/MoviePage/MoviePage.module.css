@@ -7,6 +7,11 @@
   background: transparent;
   color: #fff;
 }
+.wrap {
+  display: flex;
+  margin-top: 60px;
+  justify-content: center;
+}
 
 .input::placeholder {
   font-family: inherit;

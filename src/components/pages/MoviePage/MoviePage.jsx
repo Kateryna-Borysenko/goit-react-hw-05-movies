@@ -1,23 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 import { fetchQueryMovies } from 'services/api';
-// import * as storage from 'services/localStorage';
+import * as storage from 'services/localStorage';
 import s from './MoviePage.module.css';
 import MovieList from 'components/MovieList/MovieList';
 
-// const STORAGE_KEY = 'movies';
+const STORAGE_KEY = 'movies';
 
 const MoviePage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
+  //пришлось сохранить в localStorage иначе срабатывала на onCange
+  const [savedQuery, setsavedQuery] = useState(storage.get(STORAGE_KEY) ?? '');
 
   useEffect(() => {
+    storage.save(STORAGE_KEY, savedQuery);
+
     const getMovies = async () => {
       try {
-        if (query === '') {
+        if (savedQuery === '') {
           return;
         }
 
-        const movies = await fetchQueryMovies(query);
+        const movies = await fetchQueryMovies(savedQuery);
 
         setMovies([...movies]);
       } catch (error) {
@@ -27,7 +31,7 @@ const MoviePage = () => {
       }
     };
     getMovies();
-  }, [query]);
+  }, [savedQuery]);
 
   const inputRef = useRef(null); //!фокус
   useEffect(() => {
@@ -36,26 +40,27 @@ const MoviePage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setQuery(query); //при сабмите записалось в состояние
+    setsavedQuery(query); //при сабмите записалось в состояние значение введенное user
   };
-
   return (
     <>
-      <form className={s.form} onSubmit={handleSubmit}>
-        <input
-          onChange={e => setQuery(e.target.value)}
-          value={query} //запрос
-          className={s.input}
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Input movie name..."
-          ref={inputRef} //!фокус
-        />
-        <button type="submit" className={s.button}>
-          Search
-        </button>
-      </form>
+      <div className={s.wrap}>
+        <form onSubmit={handleSubmit}>
+          <input
+            onChange={e => setQuery(e.target.value)}
+            value={query} //запрос
+            className={s.input}
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Input movie name..."
+            ref={inputRef} //!фокус
+          />
+          <button type="submit" className={s.button}>
+            Search
+          </button>
+        </form>
+      </div>
       <MovieList movies={movies} />
     </>
   );

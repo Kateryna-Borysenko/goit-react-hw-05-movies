@@ -32,8 +32,6 @@ function App() {
           <NotFoundPage />
         </Route>
       </Switch>
-
-      <MoviePage />
     </Container>
   );
 }

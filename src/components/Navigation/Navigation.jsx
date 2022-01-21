@@ -14,12 +14,12 @@ const Navigation = () => (
 
     <NavLink
       //не перезагружается страница просто меняется адрес
-      to="/"
+      to="/movies"
       // to - куда я веду
       className={s.link}
       activeClassName={s.activeLink}
     >
-      Search movies
+      Movies
     </NavLink>
   </nav>
 );
