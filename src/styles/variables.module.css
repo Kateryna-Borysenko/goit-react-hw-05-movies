@@ -1,0 +1,11 @@
+:root {
+  --accent-color: #fe753f;
+  --text-color: #030a1b;
+  --red-color: #bf3448;
+  --btn-color: #2e6eff;
+  --btn-hover-color: #2e6dffe2;
+  --bg-color: #e5e5e5;
+  --form-bg-color: #433e89;
+  --border: 2px solid rgba(254, 117, 63, 0.1);
+  --box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.07);
+}
