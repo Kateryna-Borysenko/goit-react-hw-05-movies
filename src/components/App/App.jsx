@@ -10,6 +10,7 @@ function App() {
   return (
     <Container>
       <Appbar />
+
       <Switch>
         <Route path="/" exact>
           {/* домашняя страница со списком популярных кинофильмов */}
@@ -31,6 +32,8 @@ function App() {
           <NotFoundPage />
         </Route>
       </Switch>
+
+      <MoviePage />
     </Container>
   );
 }

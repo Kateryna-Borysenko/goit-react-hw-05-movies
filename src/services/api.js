@@ -11,4 +11,15 @@ const fetchTrandingMovies = () => {
         .catch(error => error);
 };
 
-export { fetchTrandingMovies };
+// поиск кинофильма по ключевому слову на странице фильмов.
+const fetchQueryMovies = (query, page) => {
+    return axios
+        .get(
+            `${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`,
+        )
+        .then(response => response.data.results)
+        .catch(error => error);
+};
+
+export { fetchTrandingMovies, fetchQueryMovies };
+

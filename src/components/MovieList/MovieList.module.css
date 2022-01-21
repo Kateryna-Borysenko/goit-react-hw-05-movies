@@ -46,7 +46,11 @@
   padding-left: 20px;
 }
 .voteAverage {
-  background: #7a66cc;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(122, 102, 204, 1) 100%
+  );
   border-radius: 30px 0px;
   width: 100px;
   text-align: center;
