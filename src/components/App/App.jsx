@@ -22,7 +22,7 @@ function App() {
           <MoviePage />
         </Route>
 
-        <Route path="'/movies/:movieId'">
+        <Route path="/movies/:movieId">
           {/* страница с детальной информацией о кинофильмеу */}
           <MovieDetailsPage />
         </Route>

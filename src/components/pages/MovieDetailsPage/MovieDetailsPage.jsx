@@ -1,32 +1,17 @@
 import { fetchMovieById } from 'services/api';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; //позволит вытащить id
 import s from './MovieDetailsPage.modulse.css';
 
 const MovieDetailsPage = () => {
+  const { movieId } = useParams();
   const [movie, setMovie] = useState({});
 
-  // useEffect(() => {
-  //   const getMovie = async () => {
-  //     try {
-  //       const movie = await fetchMovieById(movieId);
+  useEffect(() => {
+    fetchMovieById(movieId).then(setMovie);
+  }, [movieId]);
 
-  //       setMovie({ ...movie });
-  //     } catch (error) {
-  //       console.log(error);
-  //     } finally {
-  //       console.log('id page');
-  //     }
-  //   };
-  //   getMovie();
-  // }, [movieId]);
-
-  // useEffect(() => {
-  //   fetchMovieById(id)
-  //     .then(setMovie)
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, []);
+  // console.log(movie);
 
   const {
     original_name,
@@ -40,9 +25,11 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
+      {vote_average}
       {/* <button className="Button" type="button" onClick={onGoBack}>
         ⬅ Go back
       </button> */}
+
       <div className={s.wrap}>
         <img
           className={s.image}
