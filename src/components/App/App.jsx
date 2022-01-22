@@ -17,7 +17,7 @@ function App() {
           <HomePage />
         </Route>
 
-        <Route path="/movies">
+        <Route exact path="/movies">
           {/* страница поиска фильмов по ключевому слову */}
           <MoviePage />
         </Route>
