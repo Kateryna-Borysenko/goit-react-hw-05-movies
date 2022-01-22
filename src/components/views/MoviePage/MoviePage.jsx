@@ -27,11 +27,11 @@ const MoviePage = () => {
         console.log('Фетч по введённому запросу');
       } catch (error) {
         console.log(error);
-      } finally {
-        // ******** смущает очистка в этом месте  ********** //
-        storage.remove(STORAGE_KEY);
       }
     };
+    // ******** смущает очистка в этом месте  ********** //
+    // storage.remove(STORAGE_KEY);
+
     getMovies();
   }, [savedQuery]);
 

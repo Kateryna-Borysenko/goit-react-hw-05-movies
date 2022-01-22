@@ -27,7 +27,7 @@ const MoviePage = () => {
       } catch (error) {
         console.log(error);
       } finally {
-        console.log('можно отключить лоудер');
+        storage.remove(STORAGE_KEY);
       }
     };
     getMovies();

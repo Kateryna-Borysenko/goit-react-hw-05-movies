@@ -21,5 +21,12 @@ const fetchQueryMovies = (query) => {
         .catch(error => error);
 };
 
-export { fetchTrandingMovies, fetchQueryMovies };
+const fetchMovieById = id => {
+    return axios
+        .get(`${BASE_URL}/3/movie/${id}?api_key=${API_KEY}&language=en-US&include_adult=false`)
+        .then(response => response.data)
+        .catch(error => error);
+};
+
+export { fetchTrandingMovies, fetchQueryMovies, fetchMovieById };
 
