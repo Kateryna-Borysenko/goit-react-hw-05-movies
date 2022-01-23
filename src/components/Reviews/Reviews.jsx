@@ -12,11 +12,11 @@ const Reviews = ({ movieId }) => {
 
   return (
     <>
-      <PageHeading text="Reviews" />
       <ul className={s.list}>
-        {reviews ? (
+        {reviews.length !== 0 ? (
           reviews.map(({ id, author, content, created_at }) => (
             <li className={s.item} key={id}>
+              <PageHeading text="Reviews" />
               <p>
                 Nickname : <span className={s.author}> {author}</span>
               </p>

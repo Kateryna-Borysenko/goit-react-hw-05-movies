@@ -7,7 +7,7 @@
   width: 400px;
   height: 550px;
   border-radius: 30px 0px;
-  top: -25px;
+  top: 45px;
   right: 100px;
   object-fit: cover;
 }
@@ -51,17 +51,30 @@
 .genreValues {
   margin-top: 10px;
 }
-.button {
+.button,
+.link {
   width: 130px;
   border-radius: 30px 0px;
   text-align: center;
   font-weight: 600;
   padding: 15px 0;
-  color: #fff;
+
   background: linear-gradient(
     90deg,
     rgba(93, 12, 255, 1) 0%,
     rgba(122, 102, 204, 1) 100%
   );
-  margin-bottom: 50px;
+  margin-bottom: 100px;
+  color: #fff;
+  text-transform: uppercase;
+}
+.link {
+  display: inline-block;
+  font-family: inherit;
+  margin-top: 40px;
+  margin-right: 30px;
+  text-transform: capitalize;
+}
+.link:last-child {
+  margin-right: 0;
 }
