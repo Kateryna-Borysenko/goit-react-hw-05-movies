@@ -11,7 +11,7 @@ import {
 import s from './MovieDetailsPage.module.css';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
-import image from 'images/image-not-found-vertical.png';
+
 const MovieDetailsPage = () => {
   const { movieId } = useParams(); //возвращает динамический прараметр //! :movieId
   const [movie, setMovie] = useState({});
@@ -46,15 +46,13 @@ const MovieDetailsPage = () => {
         </button>
         <h3 className={s.title}>{original_title || original_name}</h3>
         <span className={s.releaseData}>{release_date.slice(0, 4)}</span>
-        <img
-          className={s.image}
-          src={
-            poster_path
-              ? `https://image.tmdb.org/t/p/w500${poster_path}`
-              : { image }
-          }
-          alt={original_title}
-        />
+        {poster_path && (
+          <img
+            className={s.image}
+            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+            alt={original_title}
+          />
+        )}
         <div className={s.contentWrap}>
           <div>
             <span className={s.score}>User Score : </span>
