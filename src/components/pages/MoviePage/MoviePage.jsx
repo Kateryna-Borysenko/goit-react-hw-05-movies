@@ -3,6 +3,8 @@ import { fetchQueryMovies } from 'services/api';
 import * as storage from 'services/localStorage';
 import s from './MoviePage.module.css';
 import MovieList from 'components/MovieList/MovieList';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const STORAGE_KEY = 'movies';
 
@@ -18,11 +20,14 @@ const MoviePage = () => {
     const getMovies = async () => {
       try {
         if (savedQuery === '') {
+          toast.warn('Input movie name');
           return;
         }
 
         const movies = await fetchQueryMovies(savedQuery);
-
+        if (movies.length === 0) {
+          toast.warn(`No matches found for ${savedQuery}`);
+        }
         setMovies([...movies]);
       } catch (error) {
         console.log(error);

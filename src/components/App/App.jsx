@@ -5,6 +5,7 @@ import HomePage from 'components/pages/HomePage/HomePage';
 import MoviePage from 'components/pages/MoviePage/MoviePage';
 import MovieDetailsPage from 'components/pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from 'components/pages/NotFoundPage/NotFoundPage';
+import { ToastContainer } from 'react-toastify';
 
 // import Cast from 'components/Cast/Cast';
 // import Reviews from 'components/Reviews/Reviews';
@@ -39,6 +40,7 @@ function App() {
           <NotFoundPage />
         </Route>
       </Switch>
+      <ToastContainer autoClose={3000} />
     </Container>
   );
 }
