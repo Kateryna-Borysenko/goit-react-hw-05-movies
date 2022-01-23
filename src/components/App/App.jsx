@@ -5,11 +5,13 @@ import HomePage from 'components/pages/HomePage/HomePage';
 import MoviePage from 'components/pages/MoviePage/MoviePage';
 import MovieDetailsPage from 'components/pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from 'components/pages/NotFoundPage/NotFoundPage';
+import Cast from 'components/cast/Cast';
 
 function App() {
   return (
     <Container>
       <Appbar />
+      <Cast movieId={'634649'} />
 
       <Switch>
         <Route path="/" exact>

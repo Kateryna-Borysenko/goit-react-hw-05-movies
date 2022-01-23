@@ -21,6 +21,7 @@ const fetchQueryMovies = (query) => {
         .catch(error => error);
 };
 
+//страница с детальной информацией о кинофильме.
 const fetchMovieById = id => {
     return axios
         .get(`${BASE_URL}/3/movie/${id}?api_key=${API_KEY}&language=en-US&include_adult=false`)
@@ -28,5 +29,23 @@ const fetchMovieById = id => {
         .catch(error => error);
 };
 
-export { fetchTrandingMovies, fetchQueryMovies, fetchMovieById };
+//информация о актерском составе. 
+const fetchCastById = id => {
+    return axios
+        .get(`${BASE_URL}/3/movie/${id}/credits?api_key=${API_KEY}&language=en-US&include_adult=false`)
+        .then(response => response.data)
+        .catch(error => error);
+};
+
+//информация об обзорах.
+const fetchReviewsById = id => {
+    return axios
+        .get(
+            `${BASE_URL}/3/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1&include_adult=false`,
+        )
+        .then(response => response.data)
+        .catch(error => error);
+};
+
+export { fetchTrandingMovies, fetchQueryMovies, fetchMovieById, fetchCastById, fetchReviewsById };
 
