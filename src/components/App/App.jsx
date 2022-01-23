@@ -5,13 +5,18 @@ import HomePage from 'components/pages/HomePage/HomePage';
 import MoviePage from 'components/pages/MoviePage/MoviePage';
 import MovieDetailsPage from 'components/pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from 'components/pages/NotFoundPage/NotFoundPage';
-import Cast from 'components/cast/Cast';
+
+import Cast from 'components/Cast/Cast';
+import Reviews from 'components/Reviews/Reviews';
 
 function App() {
   return (
     <Container>
       <Appbar />
+
+      {/* test item */}
       <Cast movieId={'634649'} />
+      <Reviews movieId={'559'} />
 
       <Switch>
         <Route path="/" exact>

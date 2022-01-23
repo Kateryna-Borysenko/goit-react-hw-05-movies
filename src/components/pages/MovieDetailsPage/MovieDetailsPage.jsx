@@ -9,7 +9,7 @@ import {
   Switch,
 } from 'react-router-dom'; //позволит вытащить id
 import s from './MovieDetailsPage.module.css';
-import Cast from 'components/cast/Cast';
+import Cast from 'components/Cast/Cast';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams(); //возвращает динамический прараметр //! :movieId
