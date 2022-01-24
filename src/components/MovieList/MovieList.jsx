@@ -19,7 +19,9 @@ const MovieList = ({ movies }) => {
           first_air_date,
         }) => (
           <li key={id} className={s.item}>
-            {/* <Link className={s.link} to={`/movies${url}/${id}`}> */}
+            {/*TODO: !!! Думаю тут проблема */}
+
+            {/* <Link className={s.link} to={`${url}/${id}`}> */}
             <Link className={s.link} to={`/movies/${id}`}>
               <img
                 className={s.image}

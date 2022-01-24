@@ -31,7 +31,7 @@ function App() {
         </Route>
 
         <Route path="/movies/:movieId">
-          {/* страница с детальной информацией о кинофильмеу */}
+          {/* страница с детальной информацией о кинофильме */}
           <MovieDetailsPage />
         </Route>
 

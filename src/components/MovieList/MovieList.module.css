@@ -19,6 +19,10 @@
 .link {
   color: #fff;
 }
+.activeLink {
+  color: #fff;
+  composes: link;
+}
 
 .image {
   display: block;

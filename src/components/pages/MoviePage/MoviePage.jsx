@@ -3,7 +3,6 @@ import { fetchQueryMovies } from 'services/api';
 import * as storage from 'services/localStorage';
 import s from './MoviePage.module.css';
 import MovieList from 'components/MovieList/MovieList';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const STORAGE_KEY = 'movies';
@@ -11,42 +10,35 @@ const STORAGE_KEY = 'movies';
 const MoviePage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
-  //пришлось сохранить в localStorage иначе срабатывала на onCange
+  //сохранить в localStorage иначе срабатывала на onCange (Таня - комент к дз)
   const [savedQuery, setsavedQuery] = useState(storage.get(STORAGE_KEY) ?? '');
-
-  useEffect(() => {
-    storage.save(STORAGE_KEY, savedQuery);
-
-    const getMovies = async () => {
-      try {
-        if (savedQuery === '') {
-          toast.warn('Input movie name');
-          return;
-        }
-
-        const movies = await fetchQueryMovies(savedQuery);
-        if (movies.length === 0) {
-          toast.warn(`No matches found for ${savedQuery}`);
-        }
-        setMovies([...movies]);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        storage.remove(STORAGE_KEY);
-      }
-    };
-    getMovies();
-  }, [savedQuery]);
 
   const inputRef = useRef(null); //!фокус
   useEffect(() => {
     inputRef.current.focus(); //!фокус
-  });
+  }, []);
+  // console.log(inputRef);
+
+  useEffect(() => {
+    storage.save(STORAGE_KEY, savedQuery);
+    setQuery(savedQuery); // сохраняет в поле  input последний поиск пользователя(Таня - комент к дз)
+
+    if (savedQuery === '') {
+      return;
+    }
+
+    fetchQueryMovies(savedQuery).then(setMovies);
+    //если нужно очистить cписок фильмов который искал пользователь
+    // return () => {
+    //   storage.remove(STORAGE_KEY);
+    // };
+  }, [savedQuery]);
 
   const handleSubmit = e => {
     e.preventDefault();
     setsavedQuery(query); //при сабмите записалось в состояние значение введенное user
   };
+
   return (
     <>
       <div className={s.wrap}>
