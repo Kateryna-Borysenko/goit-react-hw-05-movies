@@ -23,7 +23,7 @@ const MoviePage = () => {
     storage.save(STORAGE_KEY, savedQuery);
     setQuery(savedQuery); // сохраняет в поле  input последний поиск пользователя(Таня - комент к дз)
 
-    if (savedQuery === '') {
+    if (savedQuery.trim() === '') {
       return;
     }
 

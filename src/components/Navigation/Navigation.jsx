@@ -18,7 +18,7 @@ const Navigation = () => (
       // to - куда я веду
       className={s.link}
       activeClassName={s.activeLink}
-      exact
+      // exact
     >
       Movies
     </NavLink>
