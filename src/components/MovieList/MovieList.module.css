@@ -34,6 +34,7 @@
 .item:hover {
   cursor: pointer;
   transform: scale(1.02);
+  box-shadow: 5px 10px 10px rgb(170 178 197 / 40%);
 }
 .wrap {
   display: flex;
