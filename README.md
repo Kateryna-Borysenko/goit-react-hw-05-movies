@@ -2,7 +2,7 @@
 
  <img src="./src/images/screen.png" width="900">
 
-[Live Demo]()
+[Live Demo](https://kateryna-borysenko.github.io/goit-react-hw-05-movies/)
 
 ## Задание «Кинопоиск»
 
