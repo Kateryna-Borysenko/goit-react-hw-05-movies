@@ -1,11 +1,9 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { useRouteMatch } from 'react-router-dom';
 import s from './MovieList.module.css';
 import image from 'images/image-not-found-vertical.png';
 
 const MovieList = ({ movies }) => {
-  // const { url } = useRouteMatch();
   return (
     <ul className={s.list}>
       {movies.map(
@@ -19,9 +17,6 @@ const MovieList = ({ movies }) => {
           first_air_date,
         }) => (
           <li key={id} className={s.item}>
-            {/*TODO: !!! Думаю тут проблема */}
-
-            {/* <Link className={s.link} to={`${url}/${id}`}> */}
             <Link className={s.link} to={`/movies/${id}`}>
               <img
                 className={s.image}

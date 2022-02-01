@@ -2,14 +2,16 @@ import { lazy, Suspense } from 'react';
 import { fetchMovieById } from 'services/api';
 import { useState, useEffect } from 'react';
 import {
-  useParams,
+  useParams, //позволит вытащить id
   useHistory,
   NavLink,
   useRouteMatch,
   Route,
   Switch,
-} from 'react-router-dom'; //позволит вытащить id
+  useLocation,
+} from 'react-router-dom';
 import s from './MovieDetailsPage.module.css';
+import Spinner from 'components/common/Spinner/Spinner';
 //!статический рендер заменяем на динамический
 // import Cast from 'components/Cast/Cast';
 // import Reviews from 'components/Reviews/Reviews';
@@ -26,16 +28,22 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams(); //возвращает динамический прараметр //! :movieId
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
-  const history = useHistory();
-
+  const history = useHistory(); //!
+  // const location = useLocation(); //!
+  // console.log(history);
+  // console.log(location);
   useEffect(() => {
     fetchMovieById(movieId).then(setMovie);
   }, [movieId]);
 
+  //просто переход шаг назад goForward-вперёд push
   const onGoBack = () => {
     history.goBack(); //goBack() - встроеный метод браузера
-    //Todo: переписать на переход на главную страницу
   };
+
+  // const onGoBack = () => {
+  //   history.push(location?.state?.from ?? '/');
+  // };
 
   return (
     <>
@@ -92,7 +100,7 @@ const MovieDetailsPage = () => {
         </>
       )}
 
-      <Suspense fallback={<h2>Loading ...</h2>}>
+      <Suspense fallback={<Spinner />}>
         <Switch>
           <Route path={`${path}/cast`}>
             <Cast movieId={movieId} />

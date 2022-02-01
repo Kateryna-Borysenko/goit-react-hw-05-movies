@@ -3,8 +3,6 @@ import { fetchQueryMovies } from 'services/api';
 import * as storage from 'services/localStorage';
 import s from './MoviePage.module.css';
 import MovieList from 'components/MovieList/MovieList';
-import 'react-toastify/dist/ReactToastify.css';
-
 const STORAGE_KEY = 'movies';
 
 const MoviePage = () => {
