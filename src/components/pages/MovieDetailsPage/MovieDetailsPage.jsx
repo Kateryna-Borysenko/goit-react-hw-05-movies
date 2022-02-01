@@ -29,21 +29,24 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const history = useHistory(); //!
-  // const location = useLocation(); //!
+  const location = useLocation(); //!
   // console.log(history);
-  // console.log(location);
+
+  console.log(location);
   useEffect(() => {
     fetchMovieById(movieId).then(setMovie);
   }, [movieId]);
 
   //просто переход шаг назад goForward-вперёд push
-  const onGoBack = () => {
-    history.goBack(); //goBack() - встроеный метод браузера
-  };
-
   // const onGoBack = () => {
-  //   history.push(location?.state?.from ?? '/');
+  // history.goBack(); //goBack() - встроеный метод браузера
   // };
+
+  //вернуть пользователя на главную страницу
+  const onGoBack = () => {
+    //переход туда от куда пришла
+    history.push(location?.state?.from ?? '/');
+  };
 
   return (
     <>
@@ -86,14 +89,21 @@ const MovieDetailsPage = () => {
           <NavLink
             className={s.link}
             activeClassName={s.activeLink}
-            to={`${url}/cast`}
+            to={{
+              pathname: `${url}/cast`,
+              //в state пробрасываем исходное состояние откуда пришли
+              state: { from: location?.state?.from ?? '/' },
+            }}
           >
             Cast
           </NavLink>
           <NavLink
             className={s.link}
             activeClassName={s.activeLink}
-            to={`${url}/reviews`}
+            to={{
+              pathname: `${url}/reviews`,
+              state: { from: location?.state?.from ?? '/' },
+            }}
           >
             Reviews
           </NavLink>

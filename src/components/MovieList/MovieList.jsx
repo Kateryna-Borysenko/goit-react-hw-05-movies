@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import s from './MovieList.module.css';
 import image from 'images/image-not-found-vertical.png';
 
 const MovieList = ({ movies }) => {
+  const location = useLocation();
+  console.log(location);
   return (
     <ul className={s.list}>
       {movies.map(
@@ -17,7 +19,13 @@ const MovieList = ({ movies }) => {
           first_air_date,
         }) => (
           <li key={id} className={s.item}>
-            <Link className={s.link} to={`/movies/${id}`}>
+            <Link
+              className={s.link}
+              to={{
+                pathname: `/movies/${id}`,
+                state: { from: location }, //откуда пришли (location хранит инфо )
+              }}
+            >
               <img
                 className={s.image}
                 src={
