@@ -24,7 +24,7 @@ const Reviews = lazy(() =>
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams(); //возвращает динамический прараметр //! :movieId
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
   const history = useHistory();
 
@@ -34,80 +34,76 @@ const MovieDetailsPage = () => {
 
   const onGoBack = () => {
     history.goBack(); //goBack() - встроеный метод браузера
+    //Todo: переписать на переход на главную страницу
   };
 
-  const {
-    original_name,
-    original_title,
-    release_date,
-    poster_path,
-    vote_average,
-    overview,
-    genres,
-  } = movie;
-
   return (
-    <div className={s.contentWrap}>Test</div>
+    <>
+      {movie && (
+        <>
+          <div className={s.wrap}>
+            <button className={s.button} type="button" onClick={onGoBack}>
+              ⬅ Go back
+            </button>
+            <h3 className={s.title}>
+              {movie.original_title || movie.original_name}
+            </h3>
+            <span className={s.releaseData}>
+              {movie.release_date.slice(0, 4)}
+            </span>
+            {movie.poster_path && (
+              <img
+                className={s.image}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.original_title}
+              />
+            )}
+            <div className={s.contentWrap}>
+              <div>
+                <span className={s.score}>User Score : </span>
+                <span className={s.scoreValue}>
+                  {' '}
+                  {movie.vote_average * 10} %
+                </span>
+                <h4 className={s.subtitle}>Overview</h4>
+                <p className={s.description}>{movie.overview}</p>
+                <h4 className={s.subtitle}>Genres</h4>
+                <hr />
+                <p className={s.genreValues}>
+                  {movie.genres.map(genre => genre.name).join(' | ')}
+                </p>
+              </div>
+            </div>
+          </div>
+          <NavLink
+            className={s.link}
+            activeClassName={s.activeLink}
+            to={`${url}/cast`}
+          >
+            Cast
+          </NavLink>
+          <NavLink
+            className={s.link}
+            activeClassName={s.activeLink}
+            to={`${url}/reviews`}
+          >
+            Reviews
+          </NavLink>
+        </>
+      )}
 
-    // <>
-    //   {movie && (
-    //     <>
-    //       <div className={s.wrap}>
-    //         <button className={s.button} type="button" onClick={onGoBack}>
-    //           ⬅ Go back
-    //         </button>
-    //         <h3 className={s.title}>{original_title || original_name}</h3>
-    //         <span className={s.releaseData}>{release_date.slice(0, 4)}</span>
-    //         {poster_path && (
-    //           <img
-    //             className={s.image}
-    //             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-    //             alt={original_title}
-    //           />
-    //         )}
-    //         <div className={s.contentWrap}>
-    //           <div>
-    //             <span className={s.score}>User Score : </span>
-    //             <span className={s.scoreValue}> {vote_average * 10} %</span>
-    //             <h4 className={s.subtitle}>Overview</h4>
-    //             <p className={s.description}>{overview}</p>
-    //             <h4 className={s.subtitle}>Genres</h4>
-    //             <hr />
-    //             <p className={s.genreValues}>
-    //               {genres.map(genre => genre.name).join(' | ')}
-    //             </p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //       <NavLink
-    //         className={s.link}
-    //         activeClassName={s.activeLink}
-    //         to={`${url}/cast`}
-    //       >
-    //         Cast
-    //       </NavLink>
-    //       <NavLink
-    //         className={s.link}
-    //         activeClassName={s.activeLink}
-    //         to={`${url}/reviews`}
-    //       >
-    //         Reviews
-    //       </NavLink>
-    //     </>
-    //   )}
+      <Suspense fallback={<h2>Loading ...</h2>}>
+        <Switch>
+          <Route path={`${path}/cast`}>
+            <Cast movieId={movieId} />
+          </Route>
 
-    //   <Suspense fallback={<h2>Loading ...</h2>}>
-    //     <Switch>
-    //       <Route path={`${path}/cast`}>
-    //         <Cast movieId={movieId} />
-    //       </Route>
-
-    //       <Route path={`${path}/reviews`}>
-    //         <Reviews movieId={movieId} />
-    //       </Route>
-    //     </Switch>
-    //   </Suspense>
-    // </>
+          <Route path={`${path}/reviews`}>
+            <Reviews movieId={movieId} />
+          </Route>
+        </Switch>
+      </Suspense>
+    </>
   );
 };
 
