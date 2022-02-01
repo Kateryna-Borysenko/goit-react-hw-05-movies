@@ -8,7 +8,7 @@ const HomeView = () => {
 
   useEffect(() => {
     fetchTrandingMovies().then(response => {
-      setMovies([...response]); //записала в состояние данные  пришедшие с backend при Mounting component
+      setMovies([...response]);
     });
   }, []);
 

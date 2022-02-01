@@ -5,7 +5,6 @@ import image from 'images/image-not-found-vertical.png';
 
 const MovieList = ({ movies }) => {
   const location = useLocation();
-  console.log(location);
   return (
     <ul className={s.list}>
       {movies.map(
@@ -23,7 +22,7 @@ const MovieList = ({ movies }) => {
               className={s.link}
               to={{
                 pathname: `/movies/${id}`,
-                state: { from: location }, //откуда пришли (location хранит инфо )
+                state: { from: location },
               }}
             >
               <img
@@ -39,7 +38,6 @@ const MovieList = ({ movies }) => {
                 {original_title ? original_title : original_name}
               </h3>
               <div className={s.wrap}>
-                {/* в api приходит 2 разных названия */}
                 {release_date && (
                   <div className={s.releaseDate}>
                     {release_date.slice(0, 4)}

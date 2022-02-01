@@ -1,25 +1,13 @@
-import { NavLink } from 'react-router-dom'; //позволяет показать активное состояние
+import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
 
 const Navigation = () => (
   <nav>
-    <NavLink
-      exact //точное совпадение
-      to="/"
-      className={s.link}
-      activeClassName={s.activeLink} //покажет астивную ссылку
-    >
+    <NavLink exact to="/" className={s.link} activeClassName={s.activeLink}>
       Home
     </NavLink>
 
-    <NavLink
-      //не перезагружается страница просто меняется адрес
-      to="/movies"
-      // to - куда я веду
-      className={s.link}
-      activeClassName={s.activeLink}
-      // exact
-    >
+    <NavLink to="/movies" className={s.link} activeClassName={s.activeLink}>
       Movies
     </NavLink>
   </nav>

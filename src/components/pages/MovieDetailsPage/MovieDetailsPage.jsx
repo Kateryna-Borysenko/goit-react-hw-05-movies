@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { fetchMovieById } from 'services/api';
 import { useState, useEffect } from 'react';
 import {
-  useParams, //позволит вытащить id
+  useParams,
   useHistory,
   NavLink,
   useRouteMatch,
@@ -12,9 +12,6 @@ import {
 } from 'react-router-dom';
 import s from './MovieDetailsPage.module.css';
 import Spinner from 'components/common/Spinner/Spinner';
-//!статический рендер заменяем на динамический
-// import Cast from 'components/Cast/Cast';
-// import Reviews from 'components/Reviews/Reviews';
 
 const Cast = lazy(() =>
   import('components/Cast/Cast' /* webpackChunkName: "Cast" */),
@@ -22,29 +19,19 @@ const Cast = lazy(() =>
 const Reviews = lazy(() =>
   import('components/Reviews/Reviews' /* webpackChunkName: "Reviews" */),
 );
-//!
 
 const MovieDetailsPage = () => {
-  const { movieId } = useParams(); //возвращает динамический прараметр //! :movieId
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const { url, path } = useRouteMatch();
-  const history = useHistory(); //!
-  const location = useLocation(); //!
-  // console.log(history);
+  const history = useHistory();
+  const location = useLocation();
 
-  console.log(location);
   useEffect(() => {
     fetchMovieById(movieId).then(setMovie);
   }, [movieId]);
 
-  //просто переход шаг назад goForward-вперёд push
-  // const onGoBack = () => {
-  // history.goBack(); //goBack() - встроеный метод браузера
-  // };
-
-  //вернуть пользователя на главную страницу
   const onGoBack = () => {
-    //переход туда от куда пришла
     history.push(location?.state?.from ?? '/');
   };
 
@@ -86,17 +73,18 @@ const MovieDetailsPage = () => {
               </div>
             </div>
           </div>
+
           <NavLink
             className={s.link}
             activeClassName={s.activeLink}
             to={{
               pathname: `${url}/cast`,
-              //в state пробрасываем исходное состояние откуда пришли
               state: { from: location?.state?.from ?? '/' },
             }}
           >
             Cast
           </NavLink>
+
           <NavLink
             className={s.link}
             activeClassName={s.activeLink}

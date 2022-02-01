@@ -8,33 +8,27 @@ const STORAGE_KEY = 'movies';
 const MoviePage = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
-  //сохранить в localStorage иначе срабатывала на onCange (Таня - комент к дз)
   const [savedQuery, setsavedQuery] = useState(storage.get(STORAGE_KEY) ?? '');
 
   const inputRef = useRef(null); //!фокус
   useEffect(() => {
     inputRef.current.focus(); //!фокус
   }, []);
-  // console.log(inputRef);
 
   useEffect(() => {
     storage.save(STORAGE_KEY, savedQuery);
-    setQuery(savedQuery); // сохраняет в поле  input последний поиск пользователя(Таня - комент к дз)
+    setQuery(savedQuery);
 
     if (savedQuery.trim() === '') {
       return;
     }
 
     fetchQueryMovies(savedQuery).then(setMovies);
-    //если нужно очистить cписок фильмов который искал пользователь
-    // return () => {
-    //   storage.remove(STORAGE_KEY);
-    // };
   }, [savedQuery]);
 
   const handleSubmit = e => {
     e.preventDefault();
-    setsavedQuery(query); //при сабмите записалось в состояние значение введенное user
+    setsavedQuery(query);
   };
 
   return (
@@ -43,13 +37,13 @@ const MoviePage = () => {
         <form onSubmit={handleSubmit}>
           <input
             onChange={e => setQuery(e.target.value)}
-            value={query} //запрос
+            value={query}
             className={s.input}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Input movie name..."
-            ref={inputRef} //!фокус
+            ref={inputRef}
           />
           <button type="submit" className={s.button}>
             Search
